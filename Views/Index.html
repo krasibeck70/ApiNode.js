@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../Scripts/Form.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+<p id="content">
+
+</p>
+
+<form id="form-demo" class="form-horizontal" method="post" style="padding: 100px;" >
+    <fieldset>
+        <div id="legend">
+            <legend class="">Register</legend>
+        </div>
+        <div class="control-group">
+            <!-- Username -->
+            <label class="control-label"  for="name">Name</label>
+            <div class="controls">
+                <input type="text" id="name" name="name" placeholder="" class="input-xlarge">
+                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">E-mail</label>
+            <div class="controls">
+                <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+                <p class="help-block">Please provide your E-mail</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" for="genre">Genre</label>
+            <div class="controls">
+                <input type="text" id="genre" name="genre" placeholder="" class="input-xlarge">
+                <p class="help-block">Password should be at least 4 characters</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Password -->
+            <label class="control-label"  for="age">Age (Confirm)</label>
+            <div class="controls">
+                <input type="text" id="age" name="age" placeholder="" class="input-xlarge">
+                <p class="help-block">Please confirm password</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Password -->
+            <label class="control-label"  for="country">Country (Confirm)</label>
+            <div class="controls">
+                <input type="text" id="country" name="country" placeholder="" class="input-xlarge">
+                <p class="help-block">Please confirm password</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <button id="btn-submit" class="btn btn-success">Register</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<div class="container">
+    <input type="text" class="form-control" value="">
+    <button class="btn btn-primary" style="margin-top:10px;"> Search</button>
+</div>
+
+<script>
+    window.onload = function () {
+        inisilize();
+    }
+
+</script>
+
+</body>
+
+</html>

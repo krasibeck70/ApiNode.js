@@ -1,65 +1,51 @@
 var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-// Used to connect to the MongoDB database
-var mongo = require('mongodb')
-
-var routes = require('./Index');
-//var users = require('./routes/users');
-
+var mongoose = require('mongoose');
+var methodOverride = require("method-override");
 var app = express();
 
-// Define the directory with the views and to use Jade
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// Connection to DB
+mongoose.connect('mongodb://localhost/clients', function(err, res) {
+    if(err) throw err;
+    console.log('Connected to Database');
+});
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
+// Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(methodOverride());
 
-// Define what route files to use being routes/index.js for /
-// routes/users.js for /users
-// The route files then render the page
-app.use('/', routes);
-//app.use('/users', users);
+// Import Models and Controllers
+var models = require('./Models/Client')(app, mongoose);
+var ClientCtrl = require('./Controllers/ClientController');
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+var router = express.Router();
+
+// Index - Route
+router.get('/', function(req, res) {
+    res.send("Hola Mundo - www.programacion.com.py");
 });
 
-// error handlers
+app.use(router);
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+// API routes
+var api = express.Router();
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+api.route('/ClientController')
+    .get(ClientCtrl.findAll)
+    .post(ClientCtrl.add);
+
+api.route('/ClientController/:id')
+    .get(ClientCtrl.findById)
+    .put(ClientCtrl.update)
+    .delete(ClientCtrl.delete);
+api.route('/ClientController/')
+    .get(ClientCtrl.findByName);
+
+app.use('/api', api);
+
+
+// Start server
+app.listen(3000, function() {
+    console.log("Node server running on http://localhost:3000");
 });
-
-module.exports = app;
